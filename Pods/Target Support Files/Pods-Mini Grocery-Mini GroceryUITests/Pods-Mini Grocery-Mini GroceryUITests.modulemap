@@ -1,0 +1,6 @@
+framework module Pods_Mini_Grocery_Mini_GroceryUITests {
+  umbrella header "Pods-Mini Grocery-Mini GroceryUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
