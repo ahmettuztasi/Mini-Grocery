@@ -10,10 +10,15 @@
 		A007775BA4933FDB6E04E920 /* Pods_Mini_Grocery_Mini_GroceryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2123883BF32644A0050B9BE8 /* Pods_Mini_Grocery_Mini_GroceryUITests.framework */; };
 		C11F926D8C51A40193B138DE /* Pods_Mini_Grocery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79C7E2D450EBD001A779E93 /* Pods_Mini_Grocery.framework */; };
 		E3AE22DA25853D8A007A9558 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE22D925853D8A007A9558 /* Product.swift */; };
-		E3AE22E225853ED4007A9558 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE22E125853ED4007A9558 /* CartProduct.swift */; };
 		E3AE22EA258544BD007A9558 /* Checkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE22E9258544BD007A9558 /* Checkout.swift */; };
+		E3AE233D2585859C007A9558 /* ProductListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE233C2585859C007A9558 /* ProductListService.swift */; };
+		E3AE2342258585A7007A9558 /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE2341258585A7007A9558 /* CartService.swift */; };
+		E3AE235825859167007A9558 /* ProductListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE235725859167007A9558 /* ProductListPresenter.swift */; };
+		E3AE235D25859182007A9558 /* CartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE235C25859182007A9558 /* CartPresenter.swift */; };
+		E3AE236225859334007A9558 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE236125859334007A9558 /* ProductListViewController.swift */; };
+		E3AE236725859349007A9558 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE236625859349007A9558 /* CartViewController.swift */; };
+		E3AE239225864625007A9558 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE239125864625007A9558 /* BasePresenter.swift */; };
 		E3D4FBA5258525450029E659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D4FBA4258525450029E659 /* AppDelegate.swift */; };
-		E3D4FBA9258525450029E659 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D4FBA8258525450029E659 /* ViewController.swift */; };
 		E3D4FBAC258525450029E659 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3D4FBAA258525450029E659 /* Main.storyboard */; };
 		E3D4FBAE258525470029E659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D4FBAD258525470029E659 /* Assets.xcassets */; };
 		E3D4FBB1258525470029E659 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3D4FBAF258525470029E659 /* LaunchScreen.storyboard */; };
@@ -53,11 +58,16 @@
 		9534111E232E85710D2D4DDD /* Pods-Mini Grocery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mini Grocery.debug.xcconfig"; path = "Target Support Files/Pods-Mini Grocery/Pods-Mini Grocery.debug.xcconfig"; sourceTree = "<group>"; };
 		C79C7E2D450EBD001A779E93 /* Pods_Mini_Grocery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mini_Grocery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3AE22D925853D8A007A9558 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		E3AE22E125853ED4007A9558 /* CartProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 		E3AE22E9258544BD007A9558 /* Checkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkout.swift; sourceTree = "<group>"; };
+		E3AE233C2585859C007A9558 /* ProductListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListService.swift; sourceTree = "<group>"; };
+		E3AE2341258585A7007A9558 /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
+		E3AE235725859167007A9558 /* ProductListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListPresenter.swift; sourceTree = "<group>"; };
+		E3AE235C25859182007A9558 /* CartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPresenter.swift; sourceTree = "<group>"; };
+		E3AE236125859334007A9558 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
+		E3AE236625859349007A9558 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		E3AE239125864625007A9558 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		E3D4FBA1258525450029E659 /* Mini Grocery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mini Grocery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D4FBA4258525450029E659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E3D4FBA8258525450029E659 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E3D4FBAB258525450029E659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E3D4FBAD258525470029E659 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3D4FBB0258525470029E659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -130,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				E3AE22D925853D8A007A9558 /* Product.swift */,
-				E3AE22E125853ED4007A9558 /* CartProduct.swift */,
 				E3AE22E9258544BD007A9558 /* Checkout.swift */,
 			);
 			path = Models;
@@ -145,6 +154,43 @@
 				E3DAB0912585362400465FE3 /* Response.swift */,
 			);
 			path = ApiConnection;
+			sourceTree = "<group>";
+		};
+		E3AE23552585911B007A9558 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				E3AE235725859167007A9558 /* ProductListPresenter.swift */,
+				E3AE235C25859182007A9558 /* CartPresenter.swift */,
+				E3AE239125864625007A9558 /* BasePresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		E3AE235625859123007A9558 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E3AE236125859334007A9558 /* ProductListViewController.swift */,
+				E3AE236625859349007A9558 /* CartViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E3AE238325864415007A9558 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				E3D4FBAA258525450029E659 /* Main.storyboard */,
+				E3D4FBAF258525470029E659 /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		E3AE23842586442E007A9558 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E3D4FBAD258525470029E659 /* Assets.xcassets */,
+				E3D4FBB2258525470029E659 /* Info.plist */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		E3D4FB98258525450029E659 = {
@@ -172,14 +218,13 @@
 		E3D4FBA3258525450029E659 /* Mini Grocery */ = {
 			isa = PBXGroup;
 			children = (
+				E3D4FBA4258525450029E659 /* AppDelegate.swift */,
+				E3AE235625859123007A9558 /* Views */,
+				E3AE23552585911B007A9558 /* Presenters */,
 				E3AE22D825853D7C007A9558 /* Models */,
 				E3DAB0792585359100465FE3 /* API */,
-				E3D4FBA4258525450029E659 /* AppDelegate.swift */,
-				E3D4FBA8258525450029E659 /* ViewController.swift */,
-				E3D4FBAA258525450029E659 /* Main.storyboard */,
-				E3D4FBAD258525470029E659 /* Assets.xcassets */,
-				E3D4FBAF258525470029E659 /* LaunchScreen.storyboard */,
-				E3D4FBB2258525470029E659 /* Info.plist */,
+				E3AE238325864415007A9558 /* StoryBoards */,
+				E3AE23842586442E007A9558 /* Utils */,
 			);
 			path = "Mini Grocery";
 			sourceTree = "<group>";
@@ -205,6 +250,8 @@
 		E3DAB0792585359100465FE3 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				E3AE233C2585859C007A9558 /* ProductListService.swift */,
+				E3AE2341258585A7007A9558 /* CartService.swift */,
 				E3AE230825857B91007A9558 /* ApiConnection */,
 			);
 			path = API;
@@ -448,15 +495,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3D4FBA9258525450029E659 /* ViewController.swift in Sources */,
+				E3AE2342258585A7007A9558 /* CartService.swift in Sources */,
+				E3AE239225864625007A9558 /* BasePresenter.swift in Sources */,
+				E3AE236225859334007A9558 /* ProductListViewController.swift in Sources */,
 				E3AE22DA25853D8A007A9558 /* Product.swift in Sources */,
 				E3DAB07E258535AA00465FE3 /* APIManager.swift in Sources */,
+				E3AE235D25859182007A9558 /* CartPresenter.swift in Sources */,
 				E3D4FBA5258525450029E659 /* AppDelegate.swift in Sources */,
+				E3AE236725859349007A9558 /* CartViewController.swift in Sources */,
 				E3DAB088258535F400465FE3 /* HTTPMethod.swift in Sources */,
 				E3DAB083258535CA00465FE3 /* HttpLink.swift in Sources */,
 				E3AE22EA258544BD007A9558 /* Checkout.swift in Sources */,
-				E3AE22E225853ED4007A9558 /* CartProduct.swift in Sources */,
 				E3DAB0922585362400465FE3 /* Response.swift in Sources */,
+				E3AE235825859167007A9558 /* ProductListPresenter.swift in Sources */,
+				E3AE233D2585859C007A9558 /* ProductListService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,7 +687,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LLN3SQU5HY;
-				INFOPLIST_FILE = "Mini Grocery/Info.plist";
+				INFOPLIST_FILE = "Mini Grocery/Utils/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -655,7 +707,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LLN3SQU5HY;
-				INFOPLIST_FILE = "Mini Grocery/Info.plist";
+				INFOPLIST_FILE = "Mini Grocery/Utils/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
