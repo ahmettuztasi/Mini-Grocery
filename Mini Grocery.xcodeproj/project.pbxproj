@@ -18,6 +18,10 @@
 		E3AE236225859334007A9558 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE236125859334007A9558 /* ProductListViewController.swift */; };
 		E3AE236725859349007A9558 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE236625859349007A9558 /* CartViewController.swift */; };
 		E3AE239225864625007A9558 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE239125864625007A9558 /* BasePresenter.swift */; };
+		E3AE23AF25865830007A9558 /* ProductListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE23AD25865830007A9558 /* ProductListCollectionViewCell.swift */; };
+		E3AE23B025865830007A9558 /* ProductListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AE23AE25865830007A9558 /* ProductListCollectionViewCell.xib */; };
+		E3AE23C425866418007A9558 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE23C225866418007A9558 /* CartTableViewCell.swift */; };
+		E3AE23C525866418007A9558 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AE23C325866418007A9558 /* CartTableViewCell.xib */; };
 		E3D4FBA5258525450029E659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D4FBA4258525450029E659 /* AppDelegate.swift */; };
 		E3D4FBAC258525450029E659 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3D4FBAA258525450029E659 /* Main.storyboard */; };
 		E3D4FBAE258525470029E659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D4FBAD258525470029E659 /* Assets.xcassets */; };
@@ -66,6 +70,10 @@
 		E3AE236125859334007A9558 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		E3AE236625859349007A9558 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		E3AE239125864625007A9558 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
+		E3AE23AD25865830007A9558 /* ProductListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCollectionViewCell.swift; sourceTree = "<group>"; };
+		E3AE23AE25865830007A9558 /* ProductListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListCollectionViewCell.xib; sourceTree = "<group>"; };
+		E3AE23C225866418007A9558 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		E3AE23C325866418007A9558 /* CartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
 		E3D4FBA1258525450029E659 /* Mini Grocery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mini Grocery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D4FBA4258525450029E659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3D4FBAB258525450029E659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -171,6 +179,7 @@
 			children = (
 				E3AE236125859334007A9558 /* ProductListViewController.swift */,
 				E3AE236625859349007A9558 /* CartViewController.swift */,
+				E3AE23A4258657D0007A9558 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,6 +200,17 @@
 				E3D4FBB2258525470029E659 /* Info.plist */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		E3AE23A4258657D0007A9558 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E3AE23AD25865830007A9558 /* ProductListCollectionViewCell.swift */,
+				E3AE23AE25865830007A9558 /* ProductListCollectionViewCell.xib */,
+				E3AE23C225866418007A9558 /* CartTableViewCell.swift */,
+				E3AE23C325866418007A9558 /* CartTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		E3D4FB98258525450029E659 = {
@@ -367,7 +387,9 @@
 			files = (
 				E3D4FBB1258525470029E659 /* LaunchScreen.storyboard in Resources */,
 				E3D4FBAE258525470029E659 /* Assets.xcassets in Resources */,
+				E3AE23B025865830007A9558 /* ProductListCollectionViewCell.xib in Resources */,
 				E3D4FBAC258525450029E659 /* Main.storyboard in Resources */,
+				E3AE23C525866418007A9558 /* CartTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,11 +519,13 @@
 			files = (
 				E3AE2342258585A7007A9558 /* CartService.swift in Sources */,
 				E3AE239225864625007A9558 /* BasePresenter.swift in Sources */,
+				E3AE23C425866418007A9558 /* CartTableViewCell.swift in Sources */,
 				E3AE236225859334007A9558 /* ProductListViewController.swift in Sources */,
 				E3AE22DA25853D8A007A9558 /* Product.swift in Sources */,
 				E3DAB07E258535AA00465FE3 /* APIManager.swift in Sources */,
 				E3AE235D25859182007A9558 /* CartPresenter.swift in Sources */,
 				E3D4FBA5258525450029E659 /* AppDelegate.swift in Sources */,
+				E3AE23AF25865830007A9558 /* ProductListCollectionViewCell.swift in Sources */,
 				E3AE236725859349007A9558 /* CartViewController.swift in Sources */,
 				E3DAB088258535F400465FE3 /* HTTPMethod.swift in Sources */,
 				E3DAB083258535CA00465FE3 /* HttpLink.swift in Sources */,
