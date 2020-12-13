@@ -10,7 +10,7 @@ import Foundation
 class CartService {
     
     func checkOutCart(cartProducts: Products, completion: @escaping (Checkout?, Error?) -> Void) {
-        let dict = [ "products": cartProducts.map({["id": $0.id!, "amount": $0.amount!]}) ]
+        let dict = [ "products": cartProducts.map({["id": $0.id, "amount": $0.quantity!]}) ]
         
         APIManager().setBaseUrl(url: HttpLink.checkout.UrlValue)
             .setMethod(method: .post)

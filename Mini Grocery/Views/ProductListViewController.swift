@@ -8,6 +8,9 @@
 import UIKit
 
 class ProductListViewController: UICollectionViewController {
+    let lblBadge = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 15, height: 15))
+    var activityView: UIActivityIndicatorView?
+    
     private let productListPresenter = ProductListPresenter(productListService: ProductListService())
     
     override func viewDidLoad() {
@@ -21,17 +24,48 @@ class ProductListViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
     
     func confiugureNavBar() {
         self.navigationItem.title = "Mini Bakkal"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(cartBtnTapped))
+        let cartButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+        cartButton.setImage(UIImage(systemName: "cart.fill"), for: .normal)
+        cartButton.tintColor = .black
+        
+        self.lblBadge.backgroundColor = .white
+        self.lblBadge.clipsToBounds = true
+        self.lblBadge.layer.cornerRadius = 7
+        self.lblBadge.textColor = .black
+        self.lblBadge.textAlignment = .center
+        self.lblBadge.font = self.lblBadge.font.withSize(12)
+        self.lblBadge.text = "0"
+
+        cartButton.addSubview(self.lblBadge)
+        cartButton.addTarget(self, action: #selector(onClickCartButton), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
     }
     
-    @objc func cartBtnTapped() {
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "CarViewController") {
+    @objc func onClickCartButton() {
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            setCartProducts()
             self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func setCartProducts() {
+        CartRepository.shared.cartProducts = productListPresenter.products
+    }
+    
+    func showActivityIndicator() {
+        activityView = UIActivityIndicatorView(style: .large)
+        activityView?.center = self.view.center
+        self.view.addSubview(activityView!)
+        activityView?.startAnimating()
+    }
+
+    func hideActivityIndicator(){
+        if (activityView != nil){
+            activityView?.stopAnimating()
         }
     }
 }
@@ -46,19 +80,19 @@ extension ProductListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return productListPresenter.products.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductListCollectionViewCell", for: indexPath) as! ProductListCollectionViewCell
+        cell.setupCell(product: productListPresenter.products[indexPath.row], index: indexPath, delegate: self)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.bounds.width/3.0) - 20
-        let height = width * 1.5
         
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: 200)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -68,27 +102,38 @@ extension ProductListViewController: UICollectionViewDelegateFlowLayout {
 
 //Presenter Callbacks
 extension ProductListViewController: ProductListPresenterDelegate {
-    func setToCart(productId: String, amount: Int, info: String) {
-        print(productId)
+    func setQuantity(index: IndexPath, qty: Int) {
+        (collectionView.cellForItem(at: index) as? ProductListCollectionViewCell)?.setQuantity(qty: qty)
     }
     
     func setCartBadge(productCount: Int) {
-        print(productCount)
+        self.lblBadge.text = String(productCount)
     }
     
     func startLoading() {
-        print("startLoading")
+        showActivityIndicator()
     }
     
     func finishLoading() {
-        print("finishLoading")
+        hideActivityIndicator()
     }
     
     func setProducts(products: Products) {
-        print(products)
+        collectionView.reloadData()
     }
     
     func error(error: Error) {
+        //show alert
         print(error)
+    }
+}
+
+extension ProductListViewController: ProductListCVCellDelegate {
+    func onClickMinusButton(index: IndexPath) {
+        productListPresenter.decreaseCartProduct(product: productListPresenter.products[index.row], index: index)
+    }
+    
+    func onClickPlusButton(index: IndexPath) {
+        productListPresenter.increaseCartProduct(product: productListPresenter.products[index.row], index: index)
     }
 }

@@ -22,6 +22,8 @@
 		E3AE23B025865830007A9558 /* ProductListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AE23AE25865830007A9558 /* ProductListCollectionViewCell.xib */; };
 		E3AE23C425866418007A9558 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE23C225866418007A9558 /* CartTableViewCell.swift */; };
 		E3AE23C525866418007A9558 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AE23C325866418007A9558 /* CartTableViewCell.xib */; };
+		E3AE23EA25869E0F007A9558 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE23E925869E0F007A9558 /* UIImageViewExtension.swift */; };
+		E3AE23F42586C583007A9558 /* CartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE23F32586C583007A9558 /* CartRepository.swift */; };
 		E3D4FBA5258525450029E659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D4FBA4258525450029E659 /* AppDelegate.swift */; };
 		E3D4FBAC258525450029E659 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3D4FBAA258525450029E659 /* Main.storyboard */; };
 		E3D4FBAE258525470029E659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D4FBAD258525470029E659 /* Assets.xcassets */; };
@@ -74,6 +76,8 @@
 		E3AE23AE25865830007A9558 /* ProductListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListCollectionViewCell.xib; sourceTree = "<group>"; };
 		E3AE23C225866418007A9558 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		E3AE23C325866418007A9558 /* CartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
+		E3AE23E925869E0F007A9558 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		E3AE23F32586C583007A9558 /* CartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRepository.swift; sourceTree = "<group>"; };
 		E3D4FBA1258525450029E659 /* Mini Grocery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mini Grocery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D4FBA4258525450029E659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3D4FBAB258525450029E659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -213,6 +217,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		E3AE23E825869DFC007A9558 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E3AE23E925869E0F007A9558 /* UIImageViewExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E3D4FB98258525450029E659 = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +255,7 @@
 				E3AE23552585911B007A9558 /* Presenters */,
 				E3AE22D825853D7C007A9558 /* Models */,
 				E3DAB0792585359100465FE3 /* API */,
+				E3AE23E825869DFC007A9558 /* Extensions */,
 				E3AE238325864415007A9558 /* StoryBoards */,
 				E3AE23842586442E007A9558 /* Utils */,
 			);
@@ -270,6 +283,7 @@
 		E3DAB0792585359100465FE3 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				E3AE23F32586C583007A9558 /* CartRepository.swift */,
 				E3AE233C2585859C007A9558 /* ProductListService.swift */,
 				E3AE2341258585A7007A9558 /* CartService.swift */,
 				E3AE230825857B91007A9558 /* ApiConnection */,
@@ -526,10 +540,12 @@
 				E3AE235D25859182007A9558 /* CartPresenter.swift in Sources */,
 				E3D4FBA5258525450029E659 /* AppDelegate.swift in Sources */,
 				E3AE23AF25865830007A9558 /* ProductListCollectionViewCell.swift in Sources */,
+				E3AE23F42586C583007A9558 /* CartRepository.swift in Sources */,
 				E3AE236725859349007A9558 /* CartViewController.swift in Sources */,
 				E3DAB088258535F400465FE3 /* HTTPMethod.swift in Sources */,
 				E3DAB083258535CA00465FE3 /* HttpLink.swift in Sources */,
 				E3AE22EA258544BD007A9558 /* Checkout.swift in Sources */,
+				E3AE23EA25869E0F007A9558 /* UIImageViewExtension.swift in Sources */,
 				E3DAB0922585362400465FE3 /* Response.swift in Sources */,
 				E3AE235825859167007A9558 /* ProductListPresenter.swift in Sources */,
 				E3AE233D2585859C007A9558 /* ProductListService.swift in Sources */,

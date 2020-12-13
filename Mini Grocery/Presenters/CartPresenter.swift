@@ -8,7 +8,6 @@
 import Foundation
 
 class CartPresenter: BasePresenter {
-    
     private let cartService: CartService
     weak private var delegate: CartPresenterDelegate?
     
@@ -18,6 +17,19 @@ class CartPresenter: BasePresenter {
     
     func setDelegate(delegate: CartPresenterDelegate) {
         self.delegate = delegate
+    }
+    
+    func getCartProducts() {
+        if let cartProducts = CartRepository.shared.cartProducts {
+            for product in cartProducts {
+                if let qty = product.quantity {
+                    if qty > 0 {
+                        self.products.append(product)
+                    }
+                }
+            }
+            delegate?.setCartProducts()
+        }
     }
     
     func checkOut() {
@@ -37,8 +49,12 @@ class CartPresenter: BasePresenter {
         
     }
     
-    func calculateTotalPrice(products: Products) {
-        
+    func calculateTotalPrice() {
+        var totalPrice = 0
+        for product in products {
+            totalPrice += Int(product.price )
+        }
+        delegate?.setTotalPrice(totalPrice: totalPrice, currency: "₺")
     }
 }
 
@@ -47,6 +63,7 @@ protocol CartPresenterDelegate: NSObjectProtocol {
     func finishLoading()
     func checkoutResponse(checkout: Checkout)
     func setToCart(productId: String, amount: Int, info: String)
-    func setTotalPrice(totalPrice: Int)
+    func setTotalPrice(totalPrice: Int, currency: String)
+    func setCartProducts()
     func error(error: Error)
 }

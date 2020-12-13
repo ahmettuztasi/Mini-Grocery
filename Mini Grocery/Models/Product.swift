@@ -9,27 +9,27 @@ import Foundation
 
 // MARK: - Product
 class Product: Codable {
-    let id, name: String?
-    let price: Double?
-    let currency: String?
-    let imageURL: String?
-    let stock: Int?
-    let amount: Int?
+    let id, name: String
+    let price: Double
+    let currency: String
+    let imageURL: String
+    let stock: Int
+    var quantity: Int?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, price, currency, amount
+        case id, name, price, currency, quantity
         case imageURL = "imageUrl"
         case stock
     }
 
-    init(id: String, name: String, price: Double, currency: String, imageURL: String, stock: Int, amount: Int? = 0) {
+    init(id: String, name: String, price: Double, currency: String, imageURL: String, stock: Int, quantity: Int? = 0) {
         self.id = id
         self.name = name
         self.price = price
         self.currency = currency
         self.imageURL = imageURL
         self.stock = stock
-        self.amount = amount
+        self.quantity = quantity
     }
 }
 
