@@ -19,11 +19,12 @@ class ProductListViewController: UICollectionViewController {
         confiugureNavBar()
         
         productListPresenter.setDelegate(delegate: self)
-        productListPresenter.getProducts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.lblBadge.text = "0"
+        productListPresenter.getProducts()
     }
     
     func confiugureNavBar() {
@@ -47,13 +48,9 @@ class ProductListViewController: UICollectionViewController {
     
     @objc func onClickCartButton() {
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
-            setCartProducts()
+            productListPresenter.setCartProducts()
             self.navigationController?.pushViewController(vc, animated: true)
         }
-    }
-    
-    func setCartProducts() {
-        CartRepository.shared.cartProducts = productListPresenter.products
     }
     
     func showActivityIndicator() {
@@ -98,6 +95,11 @@ extension ProductListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 15)
     }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductListCollectionViewCell", for: indexPath) as! ProductListCollectionViewCell
+        cell.prepareForReuse()
+    }
 }
 
 //Presenter Callbacks
@@ -118,7 +120,7 @@ extension ProductListViewController: ProductListPresenterDelegate {
         hideActivityIndicator()
     }
     
-    func setProducts(products: Products) {
+    func setProducts() {
         collectionView.reloadData()
     }
     
@@ -128,7 +130,7 @@ extension ProductListViewController: ProductListPresenterDelegate {
     }
 }
 
-extension ProductListViewController: ProductListCVCellDelegate {
+extension ProductListViewController: CellDelegate {
     func onClickMinusButton(index: IndexPath) {
         productListPresenter.decreaseCartProduct(product: productListPresenter.products[index.row], index: index)
     }

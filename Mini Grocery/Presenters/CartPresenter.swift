@@ -38,6 +38,7 @@ class CartPresenter: BasePresenter {
         cartService.checkOutCart(cartProducts: products, completion: { (checkout, error) in
             if let checkout = checkout {
                 self.delegate?.checkoutResponse(checkout: checkout)
+                self.delegate?.finishLoading()
             }else {
                 self.delegate?.finishLoading()
                 self.delegate?.error(error: error!)
@@ -45,25 +46,60 @@ class CartPresenter: BasePresenter {
         })
     }
     
-    func clearCart() {
-        
+    func clearCart(){
+        products.removeAll()
+        CartRepository.shared.cartProducts?.removeAll()
+        delegate?.setCartProducts()
+    }
+    
+    func isEmptyCart() -> Bool {
+        if products.isEmpty {
+            return true
+        }else {
+            return false
+        }
     }
     
     func calculateTotalPrice() {
-        var totalPrice = 0
+        var totalPrice = 0.0
         for product in products {
-            totalPrice += Int(product.price )
+            totalPrice += (Double(product.price) * Double(product.quantity ?? 0))
         }
         delegate?.setTotalPrice(totalPrice: totalPrice, currency: "₺")
+    }
+    
+    override func increaseCartProduct(product: Product, index: IndexPath) {
+        super.increaseCartProduct(product: product, index: index)
+        delegate?.setQuantity(index: index, qty: product.quantity!)
+        calculateTotalPrice()
+    }
+    
+    override func decreaseCartProduct(product: Product, index: IndexPath) {
+        super.decreaseCartProduct(product: product, index: index)
+        delegate?.setQuantity(index: index, qty: product.quantity!)
+        if let qty = product.quantity {
+            if qty == 0 {
+                products.remove(at: index.row)
+                CartRepository.shared.cartProducts?.remove(at: index.row)
+                delegate?.deleteRow(index: index)
+            }
+        }
+        calculateTotalPrice()
+    }
+    
+    func prepareQuantity(index: IndexPath) {
+        products.remove(at: index.row)
+        CartRepository.shared.cartProducts?.remove(at: index.row)
     }
 }
 
 protocol CartPresenterDelegate: NSObjectProtocol {
+    func setQuantity(index: IndexPath, qty: Int)
     func startLoading()
     func finishLoading()
     func checkoutResponse(checkout: Checkout)
-    func setToCart(productId: String, amount: Int, info: String)
-    func setTotalPrice(totalPrice: Int, currency: String)
+    func setTotalPrice(totalPrice: Double, currency: String)
     func setCartProducts()
+    func deleteRow(index: IndexPath)
     func error(error: Error)
 }

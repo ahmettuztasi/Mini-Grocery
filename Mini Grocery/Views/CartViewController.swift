@@ -13,6 +13,8 @@ class CartViewController: UIViewController {
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
     
+    var activityView: UIActivityIndicatorView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
@@ -25,8 +27,7 @@ class CartViewController: UIViewController {
     func configureNavBar() {
         self.navigationItem.title = "Sepet"
         let closeButton = UIBarButtonItem(title: "Kapat", style: .plain, target: self, action: #selector(closeBtnTapped))
-        
-        let clearButton = UIBarButtonItem(title: "Sil", style: .plain, target: self, action: nil)
+        let clearButton = UIBarButtonItem(title: "Sil", style: .plain, target: self, action: #selector(clearCart))
         clearButton.tintColor = .red
         self.navigationItem.rightBarButtonItem = closeButton
         self.navigationItem.leftBarButtonItem = clearButton
@@ -36,10 +37,34 @@ class CartViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func clearCart() {
+        if !cartPresenter.isEmptyCart() {
+            let alert = UIAlertController(title: "Onay", message: "Sepetinizdeki ürünler silinecektir. İşleme devam etmek istiyor musunuz?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Evet", style: .default, handler: {_ in
+                self.cartPresenter.clearCart()
+            }))
+            alert.addAction(UIAlertAction(title: "Hayır", style: .default, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     @IBAction func confirmButtonClicked(_ sender: Any) {
         cartPresenter.checkOut()
     }
     
+    func showActivityIndicator() {
+        activityView = UIActivityIndicatorView(style: .large)
+        activityView?.center = self.view.center
+        self.view.addSubview(activityView!)
+        activityView?.startAnimating()
+    }
+
+    func hideActivityIndicator(){
+        if (activityView != nil){
+            activityView?.stopAnimating()
+        }
+    }
 }
 
 //Table View
@@ -54,7 +79,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CartTableViewCell") as! CartTableViewCell
-        cell.setupCell(cartProduct: cartPresenter.products[indexPath.row])
+        cell.setupCell(cartProduct: cartPresenter.products[indexPath.row], index: indexPath, delegate: self)
         return cell
     }
     
@@ -70,32 +95,60 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
 
 //Presenter Callbacks
 extension CartViewController: CartPresenterDelegate {
+    func deleteRow(index: IndexPath) {
+        tableView.reloadData()
+    }
+    
+    func setQuantity(index: IndexPath, qty: Int) {
+        (tableView.cellForRow(at: index) as? CartTableViewCell)?.setQuantity(qty: qty)
+    }
+    
     func setCartProducts() {
         cartPresenter.calculateTotalPrice()
         tableView.reloadData()
     }
     
-    func setTotalPrice(totalPrice: Int, currency: String) {
-        self.totalPriceLabel.text = currency + String(totalPrice)
-    }
-    
-    func setToCart(productId: String, amount: Int, info: String) {
-        print(info)
+    func setTotalPrice(totalPrice: Double, currency: String) {
+        self.totalPriceLabel.text = currency + String(format: "%.2f", totalPrice)
     }
     
     func checkoutResponse(checkout: Checkout) {
-        print(checkout)
+        if let message = checkout.message {
+            let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in
+                self.cartPresenter.clearCart()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }else {
+            let alert = UIAlertController(title: "", message: checkout.error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
     }
     
     func startLoading() {
-        print("startLoading")
+        showActivityIndicator()
     }
     
     func finishLoading() {
-        print("finishLoading")
+        hideActivityIndicator()
     }
     
     func error(error: Error) {
-        print(error)
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
+//Cell
+extension CartViewController: CellDelegate {
+    func onClickMinusButton(index: IndexPath) {
+        cartPresenter.decreaseCartProduct(product: cartPresenter.products[index.row], index: index)
+    }
+    
+    func onClickPlusButton(index: IndexPath) {
+        cartPresenter.increaseCartProduct(product: cartPresenter.products[index.row], index: index)
     }
 }

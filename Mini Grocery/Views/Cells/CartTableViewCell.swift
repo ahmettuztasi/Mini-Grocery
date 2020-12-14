@@ -17,6 +17,8 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var imageIndicator: UIActivityIndicatorView!
     
+    var index: IndexPath?
+    var delegate: CellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,7 +28,9 @@ class CartTableViewCell: UITableViewCell {
         self.imageView?.image = nil
     }
     
-    func setupCell(cartProduct: Product?) {
+    func setupCell(cartProduct: Product?, index: IndexPath, delegate: CellDelegate) {
+        self.delegate = delegate
+        self.index = index
         imageIndicator.isHidden = false
         imageIndicator.startAnimating()
         if let imageURL = cartProduct?.imageURL {
@@ -49,9 +53,24 @@ class CartTableViewCell: UITableViewCell {
         }
     }
     
+    func setQuantity(qty: Int) {
+        self.productQuantityLabel.text = String(qty)
+        if qty > 0 {
+            minusButton.isHidden = false
+            productQuantityLabel.isHidden = false
+        }else {
+            minusButton.isHidden = true
+            productQuantityLabel.isHidden = true
+        }
+    }
+    
     @IBAction func minusButtonClicked(_ sender: Any) {
+        delegate?.onClickMinusButton(index: index!)
     }
     
     @IBAction func plusButtonClicked(_ sender: Any) {
+        minusButton.isHidden = false
+        productQuantityLabel.isHidden = false
+        delegate?.onClickPlusButton(index: index!)
     }
 }

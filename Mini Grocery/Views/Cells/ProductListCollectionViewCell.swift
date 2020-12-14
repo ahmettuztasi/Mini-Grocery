@@ -19,7 +19,7 @@ class ProductListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageIndicator: UIActivityIndicatorView!
     
     var index: IndexPath?
-    var delegate: ProductListCVCellDelegate?
+    var delegate: CellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,7 +28,14 @@ class ProductListCollectionViewCell: UICollectionViewCell {
         productQuantityLabel.isHidden = true
     }
     
-    func setupCell(product: Product?, index: IndexPath, delegate: ProductListCVCellDelegate) {
+    override func prepareForReuse() {
+        minusButton.isHidden = true
+        productQuantityLabel.isHidden = true
+        self.productQuantityLabel.text = "0"
+        self.productImage?.image = nil
+    }
+    
+    func setupCell(product: Product?, index: IndexPath, delegate: CellDelegate) {
         self.delegate = delegate
         self.index = index
         imageIndicator.isHidden = false
@@ -81,7 +88,7 @@ class ProductListCollectionViewCell: UICollectionViewCell {
     }
 }
 
-protocol ProductListCVCellDelegate {
+protocol CellDelegate {
     func onClickMinusButton(index: IndexPath)
     func onClickPlusButton(index: IndexPath)
 }

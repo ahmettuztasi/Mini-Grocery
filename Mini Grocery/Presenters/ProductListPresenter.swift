@@ -23,16 +23,37 @@ class ProductListPresenter: BasePresenter {
     func getProducts() {
         delegate?.startLoading()
         
-        productListService.getProducts(completion: { (products, error) in
-            if let products = products {
-                self.products = products
-                self.delegate?.setProducts(products: products)
-                self.delegate?.finishLoading()
-            }else {
-                self.delegate?.finishLoading()
-                self.delegate?.error(error: error!)
+        if !CartRepository.shared.cartProducts!.isEmpty {
+            for cartProduct in CartRepository.shared.cartProducts! {
+                for product in products {
+                    if product.id == cartProduct.id {
+                        product.quantity = cartProduct.quantity
+                        break
+                    }
+                }
             }
-        })
+            
+            self.delegate?.setProducts()
+            self.delegate?.finishLoading()
+        }else {
+            productListService.getProducts(completion: { (products, error) in
+                if let products = products {
+                    self.products = products
+                    self.delegate?.setProducts()
+                    self.delegate?.finishLoading()
+                    self.calculateCartBadgeNumber()
+                }else {
+                    self.delegate?.finishLoading()
+                    self.delegate?.error(error: error!)
+                }
+            })
+        }
+        
+        calculateCartBadgeNumber()
+    }
+    
+    func setCartProducts() {
+        CartRepository.shared.cartProducts = products.filter({$0.quantity ?? 0 > 0})
     }
     
     override func increaseCartProduct(product: Product, index: IndexPath) {
@@ -61,7 +82,7 @@ class ProductListPresenter: BasePresenter {
 protocol ProductListPresenterDelegate: NSObjectProtocol {
     func startLoading()
     func finishLoading()
-    func setProducts(products: Products)
+    func setProducts()
     func setCartBadge(productCount: Int)
     func setQuantity(index: IndexPath, qty: Int)
     func error(error: Error)
