@@ -60,10 +60,18 @@ class ProductListCollectionViewCell: UICollectionViewCell {
         }
         
         if let imageURL = product?.imageURL {
-            productImage.load(url: imageURL, imageView: self.productImage) {
-                self.imageIndicator.stopAnimating()
-                self.imageIndicator.isHidden = true
-            }
+            productImage.kf.setImage(
+                with: URL(string: imageURL),
+                options: [
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ], completionHandler:
+                    {
+                        result in
+                        self.imageIndicator.stopAnimating()
+                        self.imageIndicator.isHidden = true
+                    })
         }
     }
     

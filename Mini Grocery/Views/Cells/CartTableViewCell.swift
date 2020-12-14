@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CartTableViewCell: UITableViewCell {
     
@@ -34,10 +35,18 @@ class CartTableViewCell: UITableViewCell {
         imageIndicator.isHidden = false
         imageIndicator.startAnimating()
         if let imageURL = cartProduct?.imageURL {
-            productImage.load(url: imageURL, imageView: self.productImage, completion: {
-                self.imageIndicator.stopAnimating()
-                self.imageIndicator.isHidden = true
-            })
+            productImage.kf.setImage(
+                with: URL(string: imageURL),
+                options: [
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ], completionHandler:
+                    {
+                        result in
+                        self.imageIndicator.stopAnimating()
+                        self.imageIndicator.isHidden = true
+                    })
         }
         
         if let productName = cartProduct?.name {

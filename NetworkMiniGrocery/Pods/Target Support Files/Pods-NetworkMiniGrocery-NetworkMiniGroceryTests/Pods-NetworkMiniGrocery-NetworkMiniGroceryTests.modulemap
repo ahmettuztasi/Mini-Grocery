@@ -1,0 +1,6 @@
+framework module Pods_NetworkMiniGrocery_NetworkMiniGroceryTests {
+  umbrella header "Pods-NetworkMiniGrocery-NetworkMiniGroceryTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
