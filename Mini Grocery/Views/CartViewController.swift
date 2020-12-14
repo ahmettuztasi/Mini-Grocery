@@ -96,7 +96,12 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
 //Presenter Callbacks
 extension CartViewController: CartPresenterDelegate {
     func deleteRow(index: IndexPath) {
-        tableView.reloadData()
+        tableView.deleteRows(at: [index], with: .automatic)
+        var index = 0
+        for cell in tableView.visibleCells {
+            (cell as! CartTableViewCell).index = IndexPath(row: index, section: 0)
+            index = index + 1
+        }
     }
     
     func setQuantity(index: IndexPath, qty: Int) {

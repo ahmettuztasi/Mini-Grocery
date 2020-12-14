@@ -86,11 +86,6 @@ class CartPresenter: BasePresenter {
         }
         calculateTotalPrice()
     }
-    
-    func prepareQuantity(index: IndexPath) {
-        products.remove(at: index.row)
-        CartRepository.shared.cartProducts?.remove(at: index.row)
-    }
 }
 
 protocol CartPresenterDelegate: NSObjectProtocol {
